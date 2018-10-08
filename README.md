@@ -1,7 +1,7 @@
 # AutoSpotlight
 AutoSpotlight C# .net framework project, based on NAudio library, to identify the dominant instrument in a given time interval on a midi file piece.
 
-Midi file is a hexadecimal file, built as a sequence of events, each one unique, and NAudio is a library written by Mark Heath which allows us to work fluently and easily with it without having to get down to the resolution of the machine.
+Midi file is a hexadecimal file, built as a sequence of events, and NAudio is a library written by Mark Heath which allows us to work fluently and easily with it without having to get down to the resolution of the machine.
 
 AutoSpotlight/videos include some demonstrations of our project.
 
