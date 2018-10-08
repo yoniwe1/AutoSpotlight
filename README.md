@@ -3,7 +3,7 @@ AutoSpotlight C# .net framework project, based on NAudio library, to identify th
 
 Midi file is a hexadecimal file, built as a sequence of events, and NAudio is a library written by Mark Heath which allows us to work fluently and easily with it without having to get down to the resolution of the machine.
 
-AutoSpotlight/videos includeד some demonstrations of our project.
+AutoSpotlight/videos includes some demonstrations of our project.
 
 AutoSpotloght/xls files includes examples of outputs from the pre-proccessing part which is the AutoSpotlight algorithm code.
 
