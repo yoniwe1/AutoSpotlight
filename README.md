@@ -7,7 +7,7 @@ AutoSpotlight/videos includeד some demonstrations of our project.
 
 AutoSpotloght/xls files includes examples of outputs from the pre-proccessing part which is the AutoSpotlight algorithm code.
 
-AutoSpotlight/midi files includes some midi files to run for experiment.
+AutoSpotlight/midi files includes some midi files to run for experimentation.
 
 The project is divided into two parts: 
 
