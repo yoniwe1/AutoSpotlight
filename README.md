@@ -29,7 +29,7 @@ Note that the weight of each parameter in the dominance formula given on line 35
 In order to reconstruct the project follow these steps:
 
 1. Open AutoSpotlight/AutoSpotlight algorithm/program.cs in Visual Studio. Import Packages on AutoSpotlight/AutoSpotlight algorithm/packages.
-2. On lines 23 and 27 of the code enter path to midi files. Run the code to get the output.xls file.
+2. On lines 23 and 27 of the code enter path to midi file. Run the code to get the output.xls file.
 3. Save the output.xls file as output.csv.
 4. Open AutoSpotlight/AutoSpotlight gui/MainWindow.xaml.cs in Visual Studio. On lines 24 and 27 enter the path to the CSV file you created. On line 58 enter the path to the midi file. Run the app to get the playing simulation.
  
