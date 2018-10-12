@@ -143,9 +143,9 @@ namespace AutoSpotlight
                 IDictionary<int, List<NoteOnEvent>>
                     noteOnsToChannel =
                         new Dictionary<int, List<NoteOnEvent>>(); //to handle list of notes on each channel
-                List<NoteOnEvent> noteOnCollection = new List<NoteOnEvent>();
+                List<NoteOnEvent> noteOnCollection = new List<NoteOnEvent>();   // list of all noteOn events
 
-
+                //inner loop to go through events inside an interval. Handle each relevant event with its own unique way
                 while ((myMidi.Events[0][j].AbsoluteTime - startEvent.AbsoluteTime < windowSize) || windowSize == 0)
                 {
                     switch (myMidi.Events[0][j].CommandCode.ToString())
@@ -243,7 +243,7 @@ namespace AutoSpotlight
                     {
                         break;
                     }
-                }
+                }   //end of inner loop
 
 
                 foreach (KeyValuePair<int, int> pair in sumVelocityToChannel)
@@ -253,7 +253,7 @@ namespace AutoSpotlight
                         (noteOnsToChannel[pair.Key].Count); //calculate avg velocity on each channel
                 }
 
-                var endEvent = new MidiEvent(1,1,0);    //the end event on the current interval
+                var endEvent = new MidiEvent(1,1,0);    //the end event on the current interval. If reached end of file stop!
 
                 if (endOfFile)
                 {
@@ -352,13 +352,13 @@ namespace AutoSpotlight
                         try
                         {
                             if (orderdNumOfNoteOnsToChannel.First().Value -
-                                orderdNumOfNoteOnsToChannel.Last().Value != 0)
+                                orderdNumOfNoteOnsToChannel.Last().Value != 0) 
                             {
                                 dominant[pair.Key] = (0.45) * meanVelocityToChannel[pair.Key] +
                                                      (0.2) * (double) mainVolumeToChannel[pair.Key] +
                                                      (0.35) * (double)(((127 * (double)(numOfNoteOnsToChannel[pair.Key] - orderdNumOfNoteOnsToChannel.Last().Value)) / (orderdNumOfNoteOnsToChannel.First().Value - orderdNumOfNoteOnsToChannel.Last().Value))); //calculate dominant value for each channel
                             }
-                            else
+                            else    //all channels have same number of noteOns. Go only by two other values
                             {
                                 dominant[pair.Key] = (0.5) * meanVelocityToChannel[pair.Key] +
                                                      (0.5) * (double)mainVolumeToChannel[pair.Key];
@@ -375,7 +375,7 @@ namespace AutoSpotlight
                     dominantValue = dominant;
                     var orderdDominantValue = OrderIDictionary<double>(dominantValue);   //sort the dominance
                
-                    if (orderdDominantValue.First().Key != lastDominantChannel)
+                    if (orderdDominantValue.First().Key != lastDominantChannel) //different dominant channels with the last interval
                     {
                         ourStream.Add(
                         $"from time {CalcFactor(startEvent.AbsoluteTime, tempoMap)}: Channel {orderdDominantValue.First().Key} ({patchToChannel[orderdDominantValue.First().Key]})");
