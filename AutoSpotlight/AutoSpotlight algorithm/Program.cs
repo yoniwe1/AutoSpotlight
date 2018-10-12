@@ -20,11 +20,11 @@ namespace AutoSpotlight
     {
         private static void Main()
         {
-            MidiFile midiFile = MidiFile.Read("QuatuorCordes08_Opus59_Num2_Mvt3.mid");
+            MidiFile midiFile = MidiFile.Read("QuatuorCordes08_Opus59_Num2_Mvt3.mid");  //read for Melanchall
             TempoMap tempoMap = midiFile.GetTempoMap();
 
 
-            NAudio.Midi.MidiFile myMidi = new NAudio.Midi.MidiFile("QuatuorCordes08_Opus59_Num2_Mvt3.mid");   //create midi file
+            NAudio.Midi.MidiFile myMidi = new NAudio.Midi.MidiFile("QuatuorCordes08_Opus59_Num2_Mvt3.mid");   //read for NAudio
             myMidi.Events.MidiFileType = 0; //flatten to one track
 
             try
@@ -91,14 +91,13 @@ namespace AutoSpotlight
             oApp = new Excel.Application();
             oBook = oApp.Workbooks.Add();
             oSheet = (Excel.Worksheet)oBook.Worksheets.Item[1];
-            // oSheet.Cells[1, 1].EntireRow.Font.Bold = true;
             oSheet.Cells[1, 1].EntireRow.Font.Bold = true;
             oSheet.Cells[1, 1] = "Start Time";
 
-            int lastDominantChannel = 0;
+            int lastDominantChannel = 0;    //in case of same dominant channel as before and tie between two channels now we will choose not to change
             var currentTempoEvent = new TempoEvent(0,0);
             
-            long windowSize = 0;  
+            long windowSize = 0;  //length of time interval
             var startEvent = new MidiEvent(myMidi.Events[0][0].AbsoluteTime, myMidi.Events[0][0].Channel,
                 myMidi.Events[0][0].CommandCode); //first event in each interval
             IDictionary<int, string> patchToChannel = new Dictionary<int, string>();    //to handle patches 
@@ -131,7 +130,7 @@ namespace AutoSpotlight
            var i = 0;
            var endOfFile = false;
 
-            while (true)
+            while (true)    //main loop to move between time intervals. ends when endTrack event occours
             {
                 var j = i;
                 var exitLoop = false;
